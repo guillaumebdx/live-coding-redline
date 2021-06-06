@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+hello home
+
+    <br>
+    {{ dump(app.user) }}
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p>Email: {{ app.user.email }}</p>
+    {% else %}
+        <a href="{{ path('app_login') }}">Identifiez vous</a>
+    {% endif %}
+{% endblock %}
