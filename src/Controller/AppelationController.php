@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Appelation;
 use App\Form\AppelationType;
+use App\Repository\AppelationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +16,7 @@ class AppelationController extends AbstractController
     /**
      * @Route("/appelation", name="appelation")
      */
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, AppelationRepository $appelationRepository): Response
     {
         $appelation = new Appelation();
         $form = $this->createForm(AppelationType::class, $appelation);
