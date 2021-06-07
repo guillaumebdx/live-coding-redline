@@ -1,0 +1,14 @@
+@import "~bootstrap/scss/bootstrap";
+body {
+    background-color: darkgrey;
+}
+.swiper-container {
+    width: 100%;
+}
+.bottle {
+    height: 50%;
+}
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+}
