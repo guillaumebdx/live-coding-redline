@@ -31,6 +31,7 @@ class CastleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($castle);
             $entityManager->flush();
+            $this->addFlash('success', 'Vous avez bien créé un nouveau château nommé ' . $castle->getName() );
         }
         return $this->render('castle/index.html.twig', [
             'form' => $form->createView(),

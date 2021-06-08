@@ -32,10 +32,6 @@ class CastleType extends AbstractType
                 'expanded' => false,
                 'multiple' => false,
             ])
-            ->add('date', BirthdayType::class, [
-                'mapped' => false,
-                'widget' => 'single_text',
-            ])
         ;
     }
 

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BottleController!{% endblock %}
+
+{% block body %}
+    <div class="container bottles">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {% for bottle in bottles %}
+                    <div class="swiper-slide">
+                        <img src="{{ bottle.castle.image }}" alt="" class="bottle-image">
+                        {{ bottle.castle.name }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+{% endblock %}

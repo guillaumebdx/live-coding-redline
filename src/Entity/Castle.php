@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CastleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,16 @@ class Castle
      * @ORM\ManyToOne(targetEntity=Appelation::class, inversedBy="castles")
      */
     private $appelation;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Bottle::class, mappedBy="castle", orphanRemoval=true)
+     */
+    private $bottles;
+
+    public function __construct()
+    {
+        $this->bottles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +81,36 @@ class Castle
     public function setAppelation(?Appelation $appelation): self
     {
         $this->appelation = $appelation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bottle[]
+     */
+    public function getBottles(): Collection
+    {
+        return $this->bottles;
+    }
+
+    public function addBottle(Bottle $bottle): self
+    {
+        if (!$this->bottles->contains($bottle)) {
+            $this->bottles[] = $bottle;
+            $bottle->setCastle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBottle(Bottle $bottle): self
+    {
+        if ($this->bottles->removeElement($bottle)) {
+            // set the owning side to null (unless already changed)
+            if ($bottle->getCastle() === $this) {
+                $bottle->setCastle(null);
+            }
+        }
 
         return $this;
     }
