@@ -28,6 +28,11 @@ class Bottle
      */
     private $castle;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantity;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,5 +60,27 @@ class Bottle
         $this->castle = $castle;
 
         return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function addOne(): void
+    {
+        $this->quantity += 1;
+    }
+
+    public function removeOne(): void
+    {
+        $this->quantity > 0 ? $this->quantity -= 1 : 0;
     }
 }

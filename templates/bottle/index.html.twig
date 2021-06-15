@@ -6,10 +6,15 @@
     <div class="container bottles">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                {% for bottle in bottles %}
+                {% for bottle in bottles|filter(bottle => bottle.quantity > 0)  %}
                     <div class="swiper-slide">
-                        <img src="{{ bottle.castle.image }}" alt="" class="bottle-image">
+                        {% for i in 1..bottle.quantity %}
+                            <img src="{{ bottle.castle.image }}" alt="" class="bottle-image">
+                        {% endfor %}
                         {{ bottle.castle.name }}
+                        <button data-id="{{ bottle.id }}" data-path="{{ path('bottle_remove_one', {id: bottle.id})}}" class="btn btn-danger remove-bottle">-</button>
+                        <span data-id="{{ bottle.id }}" id="display-quantity-{{ bottle.id }}">{{ bottle.quantity }}</span>
+                        <button data-id="{{ bottle.id }}" data-path="{{ path('bottle_add_one', {id: bottle.id})}}" class="btn btn-success add-bottle">+</button>
                     </div>
                 {% endfor %}
             </div>

@@ -13,3 +13,4 @@ require('bootstrap');
 // start the Stimulus application
 import './bootstrap';
 import './swipe';
+import './handleQuantity';
