@@ -39,6 +39,11 @@ class Appelation
      */
     private $castles;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function __construct()
     {
         $this->castles = new ArrayCollection();
