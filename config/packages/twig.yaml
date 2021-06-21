@@ -1,2 +1,4 @@
 twig:
+    globals:
+        starbuilder: '@App\Service\StarBuilder'
     default_path: '%kernel.project_dir%/templates'

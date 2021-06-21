@@ -41,6 +41,7 @@ class CastleFixtures extends Fixture implements DependentFixtureInterface
     {
         for ($i=0; $i<=14; $i++) {
             $castle = new Castle();
+            $castle->setRating($this->getRandomFloat());
             $castle->setName($this->fakeGenerator->castle());
             $castle->setAppelation($this->getReference('appelation_' . rand(0,10)));
             $castle->setImage(CastleFixtures::PICTURES[$i]);
@@ -49,6 +50,11 @@ class CastleFixtures extends Fixture implements DependentFixtureInterface
         }
 
         $manager->flush();
+    }
+
+    private function getRandomFloat(): float
+    {
+        return rand(5,50) /10;
     }
 
     public function getDependencies()
