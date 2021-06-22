@@ -44,11 +44,17 @@ class CastleFixtures extends Fixture implements DependentFixtureInterface
             $castle->setName($this->fakeGenerator->castle());
             $castle->setAppelation($this->getReference('appelation_' . rand(0,10)));
             $castle->setImage(CastleFixtures::PICTURES[$i]);
+            $castle->setRating($this->getRandFloat());
             $manager->persist($castle);
             $this->addReference('castle_' . $i, $castle);
         }
 
         $manager->flush();
+    }
+
+    private function getRandFloat()
+    {
+        return rand(10, 50) /10;
     }
 
     public function getDependencies()

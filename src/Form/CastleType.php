@@ -32,6 +32,7 @@ class CastleType extends AbstractType
                 'expanded' => false,
                 'multiple' => false,
             ])
+            ->add('rating')
         ;
     }
 

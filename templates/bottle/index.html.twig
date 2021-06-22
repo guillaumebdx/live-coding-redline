@@ -11,7 +11,19 @@
                         {% for i in 1..bottle.quantity %}
                             <img src="{{ bottle.castle.image }}" alt="" class="bottle-image">
                         {% endfor %}
-                        {{ bottle.castle.name }}
+                        {{ bottle.castle.name }} {{ bottle.castle.rating }}
+                        {% set starPack =  pack_builder.buildStarPack(bottle.castle.rating) %}
+                        {% if starPack.goldStarCount %}
+                            {% for i in 1..starPack.goldStarCount %}
+                                <i class="fas fa-star"></i>
+                            {% endfor %}
+                        {% endif %}
+                        {{ starPack.halfStarCount ? '<i class="fas fa-star-half-alt"></i>' : ''  }}
+                        {% if starPack.whiteStarCount %}
+                            {% for i in 1..starPack.whiteStarCount %}
+                                <i class="far fa-star"></i>
+                            {% endfor %}
+                        {% endif %}
                         <button data-id="{{ bottle.id }}" data-path="{{ path('bottle_remove_one', {id: bottle.id})}}" class="btn btn-danger remove-bottle">-</button>
                         <span data-id="{{ bottle.id }}" id="display-quantity-{{ bottle.id }}">{{ bottle.quantity }}</span>
                         <button data-id="{{ bottle.id }}" data-path="{{ path('bottle_add_one', {id: bottle.id})}}" class="btn btn-success add-bottle">+</button>
