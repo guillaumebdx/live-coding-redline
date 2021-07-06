@@ -19,6 +19,21 @@ class BottleRepository extends ServiceEntityRepository
         parent::__construct($registry, Bottle::class);
     }
 
+    public function findByYearOrCastle(array $keywords)
+    {
+        $qb = $this->createQueryBuilder('b');
+        foreach ($keywords as $index => $keyword) {
+            $qb
+                ->orWhere('b.year LIKE :keyword' . $index)
+                ->orWhere('c.name LIKE :keyword' . $index)
+                ->setParameter('keyword' . $index, '%' . $keyword . '%');
+        }
+        $qb
+            ->leftJoin('b.castle', 'c');
+        return $qb->getQuery()->getResult();
+
+    }
+
     // /**
     //  * @return Bottle[] Returns an array of Bottle objects
     //  */
